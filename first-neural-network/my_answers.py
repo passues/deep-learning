@@ -47,7 +47,6 @@ class NeuralNetwork(object):
         for X, y in zip(features, targets):
             
             final_outputs, hidden_outputs = self.forward_pass_train(X)  # Implement the forward pass function below
-            print(final_outputs, hidden_outputs)
             # Implement the backproagation function below
             delta_weights_i_h, delta_weights_h_o = self.backpropagation(final_outputs, hidden_outputs, X, y, 
                                                                         delta_weights_i_h, delta_weights_h_o)
@@ -70,7 +69,7 @@ class NeuralNetwork(object):
 
         # TODO: Output layer - Replace these values with your calculations.
         final_inputs = np.dot(hidden_outputs, self.weights_hidden_to_output) # signals into final output layer
-        final_outputs = self.activation_function(final_inputs) # signals from final output layer
+        final_outputs = final_inputs # signals from final output layer
         
         return final_outputs, hidden_outputs
 
@@ -95,7 +94,7 @@ class NeuralNetwork(object):
         #hidden_error =  output_error_term * self.weights_hidden_to_output
         
         # TODO: Backpropagated error terms - Replace these values with your calculations.
-        output_error_term = error * final_outputs * (1-final_outputs) 
+        output_error_term = error
         
         # TODO: Calculate the hidden layer's contribution to the error
         hidden_error =  np.dot(self.weights_hidden_to_output, output_error_term)
@@ -136,7 +135,7 @@ class NeuralNetwork(object):
         
         # TODO: Output layer - Replace these values with the appropriate calculations.
         final_inputs = np.dot(hidden_outputs, self.weights_hidden_to_output) # signals into final output layer
-        final_outputs = self.activation_function(final_inputs) # signals from final output layer 
+        final_outputs = final_inputs # signals from final output layer 
         
         return final_outputs
 
@@ -144,7 +143,7 @@ class NeuralNetwork(object):
 #########################################################
 # Set your hyperparameters here
 ##########################################################
-iterations = 100
+iterations = 10000
 learning_rate = 0.1
-hidden_nodes = 2
+hidden_nodes = 3
 output_nodes = 1
